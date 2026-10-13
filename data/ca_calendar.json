@@ -1,0 +1,43 @@
+{
+ "note": "Points de rupture : chefs des partis principaux et fondation du PPC (lignes d'événements des tableaux Wikipédia) ; campagnes : déclenchement et scrutin.",
+ "changepoints": [
+  "2017-03-18",
+  "2017-05-27",
+  "2017-10-01",
+  "2018-09-14",
+  "2019-01-17",
+  "2020-08-24",
+  "2022-09-10",
+  "2025-03-09",
+  "2026-03-29"
+ ],
+ "events": {
+  "2017-03-18": "Martine Ouellet is acclaimed leader of the Bloc Québécois (March 18, 2017)",
+  "2017-05-27": "Andrew Scheer is elected leader of the Conservative Party of Canada (May 27, 2017)",
+  "2017-10-01": "Jagmeet Singh is elected leader of the New Democratic Party (October 1, 2017)",
+  "2018-09-14": "Maxime Bernier forms the People's Party of Canada following his resignation from the Conservative Party caucus (September 14, 2018)",
+  "2019-01-17": "Yves-François Blanchet is acclaimed leader of the Bloc Québécois (January 17, 2019)",
+  "2020-08-24": "August 24, 2020 Erin O'Toole is elected leader of the Conservative Party",
+  "2022-09-10": "September 10, 2022 Pierre Poilievre is elected leader of the Conservative Party.",
+  "2025-03-09": "March 9, 2025 Mark Carney is elected leader of the Liberal Party.",
+  "2026-03-29": "March 29, 2026 Avi Lewis is elected as leader of the New Democratic Party."
+ },
+ "campaigns": [
+  [
+   "2015-08-02",
+   "2015-10-19"
+  ],
+  [
+   "2019-09-11",
+   "2019-10-21"
+  ],
+  [
+   "2021-08-15",
+   "2021-09-20"
+  ],
+  [
+   "2025-03-23",
+   "2025-04-28"
+  ]
+ ]
+}
