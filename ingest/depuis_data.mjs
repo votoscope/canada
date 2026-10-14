@@ -6,11 +6,12 @@
  *    circonscription et par parti (2015, 2019, 2021 sur la carte 2013 ; 2021
  *    transposé et 2025 sur la carte 2023) ;
  *  - data/ca_candidates.json : candidats, députés sortants marqués ;
- *  - data/ca_census.json : recensement 2021 par circonscription, par carte.
+ *  - data/ca_census.json : recensement 2021 par circonscription, par carte ;
+ *  - data/ca_ridings_2023.geojson : limites de la carte 2023, simplifiées.
  *
  * Run: node ingest/depuis_data.mjs [chemin du dépôt data]
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -58,3 +59,6 @@ for (const r of lireCsv(join(DATA, "csv", "recensement_circonscriptions_federale
   (census[carte] ??= {})[circonscription] = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, Number(x)]));
 }
 ecrire("ca_census.json", census);
+
+copyFileSync(join(DATA, "geo", "circonscriptions_federales_2023.geojson"), new URL("ca_ridings_2023.geojson", OUT));
+console.log("ca_ridings_2023.geojson : copié");

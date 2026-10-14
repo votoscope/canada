@@ -18,7 +18,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { ridings, aggregate, TRANSITIONS, P, MAIN, REGIONS } from "../lib/federal.mjs";
 import { loadBreakdowns, pooled } from "../lib/regional.mjs";
 import { simulate, localResiduals, present, clrOn, correctTarget, interval } from "../lib/simulate.mjs";
-import { seatDistributions, governmentScenarios } from "../src/simulate.js";
+import { seatDistributions, governmentScenarios, pivotPower } from "../src/simulate.js";
 import { fitTrend, predictTrendSeries } from "../src/gpTrend.js";
 import { pivotPolls } from "../src/compositional.js";
 
@@ -122,6 +122,7 @@ const dash = {
   seatDistributions: seatDistributions(draws, partyCodes),
   pointCounts: { ...sim.pointSeats, AUTRES: 0 }, medoidCounts: { ...sim.medoid, AUTRES: 0 },
   scenarios: governmentScenarios(draws, list.length, partyCodes),
+  pivotPower: pivotPower(draws, list.length, partyCodes),
   disproportion: { voteShare: vMean, seatShare: sMean, gaps: Object.fromEntries(P.map((p) => [p, { p05: q(gaps[p], 5), p50: q(gaps[p], 50), p95: q(gaps[p], 95) }])), gallagher: { p05: q(gal, 5), p50: q(gal, 50), p95: q(gal, 95) } },
 };
 writeFileSync(new URL("../data/ca_dashboard.json", import.meta.url), JSON.stringify(dash));
