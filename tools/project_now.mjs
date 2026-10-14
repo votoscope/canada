@@ -86,15 +86,22 @@ console.log(`  σ national ${P.map((p, j) => `${p} ${sigmaC[j].toFixed(2)}`).joi
 const draws = sim.seats.map((d) => ({ ...d, AUTRES: 0 }));
 const partyCodes = P;
 const nat2 = pivotPolls(load("ca_national_polls.json"));
+// Tendance affichée : un GP par cycle (2015-2019, 2019-2021, 2021-2025, depuis 2025),
+// dernier sondage de chaque firme par semaine, séries mises bout à bout.
 const week = (d) => Math.floor(Date.parse(d) / 864e5 / 7);
-const byWeek = new Map();
-for (const p of nat2.polls) { if (p.pollDate <= LAST[0] || p.pollDate > asOf) continue; const k = `${p.firm}|${week(p.pollDate)}`; if (!byWeek.has(k) || p.pollDate > byWeek.get(k).pollDate) byWeek.set(k, p); }
-const cyclePolls = [...byWeek.values()].sort((a, b) => a.pollDate.localeCompare(b.pollDate));
-const model = fitTrend(cyclePolls, nat2.partyCodes, { calendar: load("ca_calendar.json") });
-const dates = [];
-for (let d = new Date(cyclePolls[0].pollDate); d <= new Date(asOf); d.setDate(d.getDate() + 7)) dates.push(d.toISOString().slice(0, 10));
-if (dates[dates.length - 1] !== asOf) dates.push(asOf);
-const trendSeries = predictTrendSeries(model, dates, { nSamples: 300, seed: 1 });
+const pollsBetween = (from, to) => {
+  const byWeek = new Map();
+  for (const p of nat2.polls) { if (p.pollDate <= from || p.pollDate > to) continue; const k = `${p.firm}|${week(p.pollDate)}`; if (!byWeek.has(k) || p.pollDate > byWeek.get(k).pollDate) byWeek.set(k, p); }
+  return [...byWeek.values()].sort((a, b) => a.pollDate.localeCompare(b.pollDate));
+};
+const weekly = (from, to) => { const out = []; for (let d = new Date(from); d <= new Date(to); d.setDate(d.getDate() + 7)) out.push(d.toISOString().slice(0, 10)); if (out.at(-1) !== to) out.push(to); return out; };
+const calendarCa = load("ca_calendar.json");
+const cycleSeries = (from, to) => {
+  const ps = pollsBetween(from, to);
+  return predictTrendSeries(fitTrend(ps, nat2.partyCodes, { calendar: calendarCa }), weekly(ps[0].pollDate, to), { nSamples: 300, seed: 1 });
+};
+const cyclePolls = pollsBetween(LAST[0], asOf);
+const trendSeries = [...TRANSITIONS.flatMap((T) => cycleSeries(T.base[0], T.target[0])), ...cycleSeries(LAST[0], asOf)];
 // Indice de Gallagher du dernier scrutin (repère de la distorsion).
 const gallagherPrevious = (() => {
   const v = aggregate(list), s2 = P.map(() => 0);
