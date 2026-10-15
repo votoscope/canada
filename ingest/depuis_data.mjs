@@ -1,5 +1,5 @@
 /**
- * Entrées du modèle tirées du dépôt de données votoscope/data (clone voisin
+ * Entrées du modèle tirées du dépôt de données votovision/data (clone voisin
  * ../data, ou chemin donné en argument) :
  *  - data/ca_national_polls.json : sondages nationaux fédéraux ;
  *  - data/ca_riding_results.json : résultats officiels d'Élections Canada par

@@ -19,7 +19,7 @@ const PAGES = [
   "Opinion polling for the 2025 Canadian federal election",
   "Opinion polling for the 46th Canadian federal election",
 ];
-const USER_AGENT = "votoscope-canada/0.1 (https://github.com/votoscope/canada; yysrk9lh@duck.com)";
+const USER_AGENT = "votovision-canada/0.1 (https://github.com/votovision/canada; yysrk9lh@duck.com)";
 const MONTHS = { january: 1, february: 2, march: 3, april: 4, may: 5, june: 6, july: 7, august: 8, september: 9, october: 10, november: 11, december: 12 };
 const iso = (m) => `${m[3]}-${String(MONTHS[m[1].toLowerCase()]).padStart(2, "0")}-${m[2].padStart(2, "0")}`;
 const LEADER = /(elected|acclaimed) (as )?leader of the (Conservative Party|Liberal Party|New Democratic Party|Bloc Québécois)/i;

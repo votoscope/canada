@@ -1,7 +1,7 @@
 {
-  "name": "votoscope-canada",
+  "name": "votovision-canada",
   "version": "0.1.0",
-  "description": "Modèle de projection des élections fédérales canadiennes (Votoscope)",
+  "description": "Modèle de projection des élections fédérales canadiennes (Votovision)",
   "type": "module",
   "license": "GPL-3.0-only",
   "scripts": {
